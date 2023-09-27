@@ -1,10 +1,29 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Кино</title>
+    {% block head %}
+        <title>Кино</title>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% endblock head %}
 </head>
 <body>
-<h1>Каталог фильмов</h1>
+{% block menu %}
+    <div class="menu">
+        <a href="{% url 'home' %}">Главная</a>
+        <a href="{% url 'allkino' %}">Фильмы</a>
+        <a href="">Актеры</a>
+        <a href="">Режиссеры</a>
+        <a href="">Подписка</a>
+    </div>
+{% endblock menu %}
+{% block content %}
+    <h2>Каталог фильмов</h2>
+    <h3>На сайте {{ k1 }} фильмов</h3>
+    <h3>На сайте {{ k2 }} актеров</h3>
+    <h3>На сайте {{ k3 }} фильмов бесплатно</h3>
+{% endblock content %}
+
 </body>
 </html>

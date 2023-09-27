@@ -1,0 +1,15 @@
+.menu{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: gainsboro;
+    line-height: 2em;
+}
+.menu a{
+    text-decoration: none;
+    color: black;
+    font-size: 1.5em;
+}
+.menu a:hover{
+    background-color: yellow;
+}
