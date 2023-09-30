@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+{% block content %}
+    <h2>Визиты наших клиентов</h2>
+    <ul>
+        {% for animal in animal_list %}
+            <li>
+                <p><a href="{{ animal.get_absolute_url}}">{{ animal.nickname }}</a> {{ animal.date }}</p>
+
+            </li>
+
+        {% endfor %}
+    </ul>
+
+{% endblock content %}
