@@ -75,4 +75,5 @@ class Film(models.Model):
     display_actors.short_description = 'Актеры'
 
     def get_absolute_url(self):
-        return reverse('info', args=[self.id])
+        return reverse('info', args=[self.id,self.title])
+        # return  f'kino/{self.id/{self.title}'

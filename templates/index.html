@@ -16,9 +16,12 @@
         <a href="">Актеры</a>
         <a href="">Режиссеры</a>
         <a href="">Подписка</a>
+        <a href="{% url 'login' %}">LOGIN</a>
+        <a href="{% url 'logout' %}">LOGOUT</a>
     </div>
 {% endblock menu %}
 {% block content %}
+    <h1>Привет {{ username }}</h1>
     <h2>Каталог фильмов</h2>
     <h3>На сайте {{ k1 }} фильмов</h3>
     <h3>На сайте {{ k2 }} актеров</h3>

@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'index.html' %}
+{% block content %}
+    <h2>Фильм {{ film.title }}</h2>
+    <h2>Описание {{ film.summary }}</h2>
+    <h2>Режиссер {{ film.director }}</h2>
+    <h2>Рейтинг {{ film.ager }}</h2>
+    <h2>Уровень подписки {{ film.status }}</h2>
+    <h2>Актеры:</h2>
+    {% for actor in film.actor.all %}
+        <p>{{ actor.fname }} // {{ actor.lname }}</p>
 
-</body>
-</html>
+    {% endfor %}
+{% endblock %}
