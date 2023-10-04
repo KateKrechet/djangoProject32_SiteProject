@@ -15,9 +15,13 @@
         <a href="{% url 'allkino' %}">Фильмы</a>
         <a href="">Актеры</a>
         <a href="">Режиссеры</a>
-        <a href="">Подписка</a>
-        <a href="{% url 'login' %}">LOGIN</a>
-        <a href="{% url 'logout' %}">LOGOUT</a>
+        <a href="{% url 'status' %}">Подписка</a>
+        {% if not user.username %}
+            <a href="{% url 'login' %}">LOGIN</a>
+        {% else %}
+             <a href="{% url 'logout' %}">LOGOUT</a>
+        {% endif %}
+
     </div>
 {% endblock menu %}
 {% block content %}

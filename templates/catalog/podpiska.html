@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+    <title>Все фильмы</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/podpiska.css' %}">
+{% endblock head %}
+
+{% block content %}
+    <h2>Подписки</h2>
+    {% for one in podpiska %}
+        <h3 class="main">{{ one.name }}</h3>
+        <div class="cont">
+            {% for film in one.film_set.all %}
+                <div class="card">
+                    <img src="{% static film.image %}" alt="">
+                    <h4>{{ film.title }}</h4>
+                    <h6>{{ film.genre }}</h6>
+                    {% if user.username %}
+                        <a href="{% url 'prosmotr' film.id one.id user.id %}">
+                            <button>Смотреть</button>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'prosmotr' film.id one.id 0 %}">
+                            <button>Смотреть</button>
+                        </a>
+                    {% endif %}
+
+
+                </div>
+            {% endfor %}
+        </div>
+
+    {% endfor %}
+
+{% endblock content %}

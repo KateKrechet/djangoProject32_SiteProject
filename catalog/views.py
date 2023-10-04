@@ -11,12 +11,14 @@ def index(req):
     numkino = Film.objects.all().count()
     numact = Actor.objects.all().count()
     numfree = Film.objects.filter(status__film=1).count()
-    # try:
-    #     username = req.user.first_name
-    # except:
-    #     username = 'Guest'
+    if req.user.username:
+        username = req.user.first_name
+        print(req.user.first_name, '#', req.user.id)
+    else:
+        username = 'Гость'
+        print(req.user.id)
     print(req.user.username)
-    data = {'k1': numkino, 'k2': numact, 'k3': numfree}
+    data = {'k1': numkino, 'k2': numact, 'k3': numfree, 'username': username}
     # user = User.objects.create_user('user2', 'user2@mail.ru', 'useruser')
     # user.first_name = 'Vlad'
     # user.last_name = 'Petrov'
@@ -35,6 +37,31 @@ class KinoList(generic.ListView):
 class KinoDetail(generic.DetailView):
     model = Film
 
+
 # def info(req,id):
 #     film = Film.objects.get(id=id)
 #     return HttpResponse(film.title)
+
+def status(req):
+    k1 = Status.objects.all()
+    data = {'podpiska': k1}
+    return render(req, 'catalog/podpiska.html', data)
+
+
+def prosmotr(req, id1, id2, id3):
+    print(id1, id2, id3)
+    mas = ['бесплатно', 'базовая', 'супер']  # film id2
+    mas2 = ['free', 'based', 'super']  # user id3
+    # id подписки в таблице
+    status = User.objects.get(id=id3)
+    status = status.groups.all()#нашли список его подписок
+    print(status)
+    status = status[0].id#нашли id его подписки, она одна
+    print(status)
+    if id3 == 0:
+        status = 1
+    if status >= id2:#сравниваем статус человека и подписку фильма
+        print('ok')
+    else:
+        print('нельзя')
+    return render(req, 'index.html')

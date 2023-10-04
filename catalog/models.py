@@ -62,6 +62,7 @@ class Film(models.Model):
     ager = models.ForeignKey(AgeRate, on_delete=models.SET_NULL, null=True)
     actor = models.ManyToManyField(Actor, verbose_name='Актеры')
     status = models.ForeignKey(Status, on_delete=models.SET_DEFAULT, default=1)
+    image = models.CharField(max_length=100, blank=True, null=True, verbose_name='Картинка')
 
     def __str__(self):
         return self.title
@@ -75,5 +76,5 @@ class Film(models.Model):
     display_actors.short_description = 'Актеры'
 
     def get_absolute_url(self):
-        return reverse('info', args=[self.id,self.title])
+        return reverse('info', args=[self.id, self.title])
         # return  f'kino/{self.id/{self.title}'
