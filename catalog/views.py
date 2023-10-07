@@ -31,7 +31,7 @@ def index(req):
 
 class KinoList(generic.ListView):
     model = Film
-    paginate_by = 2
+    paginate_by = 10
 
 
 class KinoDetail(generic.DetailView):
@@ -40,6 +40,7 @@ class KinoDetail(generic.DetailView):
 
 class ActorList(generic.ListView):
     model = Actor
+    paginate_by = 10
 
 
 class ActorDetail(generic.DetailView):
@@ -48,6 +49,7 @@ class ActorDetail(generic.DetailView):
 
 class DirectorList(generic.ListView):
     model = Director
+    paginate_by = 10
 
 
 class DirectorDetail(generic.DetailView):

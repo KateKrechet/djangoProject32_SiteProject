@@ -1,18 +1,70 @@
-.menu{
-    display:flex;
+.menu {
+    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     background-color: gainsboro;
     line-height: 2em;
+
 }
-.menu a{
+
+.menu a {
     text-decoration: none;
-    color: black;
-    font-size: 1.5em;
+    color: darkblue;
+    font-size: 1.7em;
+    font-weight: bold;
+
 }
-.menu a:hover{
+
+.menu a:hover {
     background-color: yellow;
 }
-body{
+
+ul li a {
+    text-decoration: none;
+    color: darkblue;
+}
+
+ul li a:hover {
+    background-color: yellow;
+}
+
+body {
     background-color: beige;
+    font-family: Calibri;
+
+}
+
+h1 {
+
+    color: crimson;
+}
+
+h2 {
+    color: crimson;
+}
+
+h3 {
+    color: dimgrey;
+}
+h4{
+    color: crimson;
+    font-size: 1.1em;
+}
+p{
+    color: crimson;
+}
+ul li{
+    list-style-type: circle;
+}
+.pagination{
+    color: dimgrey;
+    font-size: 1.1em;
+
+}
+.pagination a{
+    text-decoration: none;
+    color: darkblue;
+}
+.pagination a:hover{
+    background-color: yellow;
 }

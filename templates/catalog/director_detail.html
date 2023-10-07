@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 {% block content %}
-    <h2>Режиссер: {{ director.fname }} {{ director.lname }}</h2>
-    <h2>Работы режиссера:</h2>
+    <h3>Режиссер: {{ director.fname }} {{ director.lname }}</h3>
+    <h3>Работы режиссера:</h3>
     {% for film in director.film_set.all %}
         <h4>{{ film.title }}</h4>
     {% endfor %}

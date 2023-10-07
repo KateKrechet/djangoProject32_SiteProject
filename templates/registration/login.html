@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Вход</h1>
+<h2>Вход</h2>
 <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
     <table>
@@ -19,6 +19,7 @@
             <td>{{ form.password }}</td>
         </tr>
     </table>
+    <br>
     <input type="submit" value="вход">
 
 </form>
