@@ -38,6 +38,22 @@ class KinoDetail(generic.DetailView):
     model = Film
 
 
+class ActorList(generic.ListView):
+    model = Actor
+
+
+class ActorDetail(generic.DetailView):
+    model = Actor
+
+
+class DirectorList(generic.ListView):
+    model = Director
+
+
+class DirectorDetail(generic.DetailView):
+    model = Director
+
+
 # def info(req,id):
 #     film = Film.objects.get(id=id)
 #     return HttpResponse(film.title)
@@ -53,14 +69,16 @@ def prosmotr(req, id1, id2, id3):
     mas = ['бесплатно', 'базовая', 'супер']  # film id2
     mas2 = ['free', 'based', 'super']  # user id3
     # id подписки в таблице
-    status = User.objects.get(id=id3)
-    status = status.groups.all()#нашли список его подписок
-    print(status)
-    status = status[0].id#нашли id его подписки, она одна
-    print(status)
     if id3 == 0:
         status = 1
-    if status >= id2:#сравниваем статус человека и подписку фильма
+    else:
+        status = User.objects.get(id=id3)
+        status = status.groups.all()  # нашли список его подписок
+        print(status)
+        status = status[0].id  # нашли id его подписки, она одна
+    print(status)
+
+    if status >= id2:  # сравниваем статус человека и подписку фильма
         print('ok')
     else:
         print('нельзя')

@@ -17,6 +17,9 @@ class Director(models.Model):
     def __str__(self):
         return f'{self.fname} {self.lname}'
 
+    def get_absolute_url_dir(self):
+        return reverse('info_dir', args=[self.id, self.fname, self.lname])
+
 
 class Actor(models.Model):
     fname = models.CharField(max_length=20, verbose_name='Имя')
@@ -25,7 +28,10 @@ class Actor(models.Model):
     country = models.CharField(max_length=20, verbose_name='Страна', blank=True, null=True)
 
     def __str__(self):
-        return self.lname
+        return f'{self.fname} {self.lname}'
+
+    def get_absolute_url_actor(self):
+        return reverse('info_act', args=[self.id, self.fname, self.lname])
 
 
 class Status(models.Model):

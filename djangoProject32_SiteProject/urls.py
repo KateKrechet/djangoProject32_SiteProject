@@ -21,9 +21,19 @@ from catalog import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='home'),
+    # ссылка Фильмы
     path('kino/', views.KinoList.as_view(), name='allkino'),
     # path('kino/<int:id>/<str:title>', views.info, name='info'),
+    # ссылка на инфо о каждом фильме
     path('kino/<slug:pk>/<str:title>', views.KinoDetail.as_view(), name='info'),
+    # ссылка Актеры
+    path('actors/', views.ActorList.as_view(), name='allactors'),
+    # ссылка на инфо о каждом актере
+    path('actors/<slug:pk>/<str:fname>/<str:lname>', views.ActorDetail.as_view(), name='info_act'),
+    # ссылка Режиссеры
+    path('directors/', views.DirectorList.as_view(), name='alldir'),
+    # ссылка на инфо о каждом режиссере
+    path('directors/<slug:pk>/<str:fname>/<str:lname>', views.DirectorDetail.as_view(), name='info_dir'),
     # автоматически подключаются login logout
     path('user/', include('django.contrib.auth.urls')),
     path('status/', views.status, name='status'),
