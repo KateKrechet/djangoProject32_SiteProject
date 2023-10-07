@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 {% block content %}
     <h2>Актер: {{ actor.fname }} {{ actor.lname }}</h2>
-    <h2> Рожден: {{ actor.born }}</h2>
+{#    <h2> Рожден: {{ actor.born }}</h2>#}
     <h2>Страна: {{ actor.country }}</h2>
     <h2>В каких фильмах снимался:</h2>
     {% for film in actor.film_set.all %}

@@ -39,7 +39,7 @@ class KinoAdmin(admin.ModelAdmin):
     fieldsets = (
         ('О фильме', {'fields': ('title', 'summary', 'actor')}),
         (('Рейтинг'), {'fields': ('rating', 'ager', 'status')}),
-        (('Остальное'), {'fields': ('genre', 'country', 'director', 'year')}))
+        (('Остальное'), {'fields': ('genre', 'country', 'director', 'year', 'image')}))
 
 
 admin.site.register(Film, KinoAdmin)
