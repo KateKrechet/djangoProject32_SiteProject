@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .models import *
 from django.views import generic
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+# импорт пользователей и групп, где они могут находиться
+from django.contrib.auth.models import User, Group
 
 
 # Create your views here.
@@ -82,6 +83,32 @@ def prosmotr(req, id1, id2, id3):
 
     if status >= id2:  # сравниваем статус человека и подписку фильма
         print('ok')
+        permission = True
     else:
         print('нельзя')
-    return render(req, 'index.html')
+        permission = False
+    k1 = Film.objects.get(id=id1).title
+    k2 = Group.objects.get(id=status).name
+    k3 = Status.objects.get(id=id2).name
+    data = {'kino': k1, 'status': k2, 'statuskino': k3, 'prava': permission}
+    return render(req, 'prosmotr.html', context=data)
+
+
+def buy(req, type):
+    # находим номер текущего пользователя
+    usid = req.user.id
+    # находим его в таблице user
+    user123 = User.objects.get(id=usid)
+    # номер его подписки(группы)
+    statusnow = user123.groups.all()[0].id
+    # находим его подписку в таблицу group
+    groupold = Group.objects.get(id=statusnow)
+    # удаляем старую подписку user123
+    groupold.user_set.remove(user123)
+    # находим новую подписку в таблице group
+    groupnew =Group.objects.get(id=type)
+    # добавляем новую подписку
+    groupnew.user_set.add(user123)
+    k1 = groupnew.name
+    data = {'podpiska':k1}
+    return render(req, 'buy.html',data)
