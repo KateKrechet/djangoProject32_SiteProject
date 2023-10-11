@@ -4,6 +4,7 @@ from django.views import generic
 from django.http import HttpResponse
 # импорт пользователей и групп, где они могут находиться
 from django.contrib.auth.models import User, Group
+from .form import Signupform
 
 
 # Create your views here.
@@ -106,9 +107,45 @@ def buy(req, type):
     # удаляем старую подписку user123
     groupold.user_set.remove(user123)
     # находим новую подписку в таблице group
-    groupnew =Group.objects.get(id=type)
+    groupnew = Group.objects.get(id=type)
     # добавляем новую подписку
     groupnew.user_set.add(user123)
     k1 = groupnew.name
-    data = {'podpiska':k1}
-    return render(req, 'buy.html',data)
+    data = {'podpiska': k1}
+    return render(req, 'buy.html', data)
+
+
+from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect
+
+
+def registr(req):
+    print(1)
+    if req.POST:
+        print(2)
+        anketa = Signupform(req.POST)
+        if anketa.is_valid():
+            print(3)
+            anketa.save()
+            k1 = anketa.cleaned_data.get('username')
+            k2 = anketa.cleaned_data.get('password')
+            k3 = anketa.cleaned_data.get('first_name')
+            k4 = anketa.cleaned_data.get('last_name')
+            k5 = anketa.cleaned_data.get('email')
+            user = authenticate(username=k1, password=k2) #сохраняет нового пользователя
+            man = User.objects.get(username=k1) #найдем нового пользователя
+            # заполним поля в таблице
+            man.email = k5
+            man.first_name = k3
+            man.last_name = k4
+            man.save()
+            # входим на сайт
+            # login(req, user)
+            group = Group.objects.get(id=1) #находим бесплатную подписку
+            # добавляем в подписку №1 созданного человека
+            group.user_set.add(man)
+            return redirect('home')
+    else:
+        anketa = Signupform()
+    data = {'regform': anketa}
+    return render(req, 'registration/registration.html', context=data)
