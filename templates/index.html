@@ -16,6 +16,7 @@
         <a href="{% url 'allactors' %}">Актеры</a>
         <a href="{% url 'alldir' %}">Режиссеры</a>
         <a href="{% url 'status' %}">Подписка</a>
+        <a href="{% url 'change_status' %}">Купить/отказаться от подписки</a>
         {% if not user.username %}
             <a href="{% url 'login' %}">LOGIN</a>
         {% else %}

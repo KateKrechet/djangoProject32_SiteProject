@@ -115,6 +115,43 @@ def buy(req, type):
     return render(req, 'buy.html', data)
 
 
+def change_status(req):
+    return render(req, 'change_status.html')
+
+
+def new_status(req):
+    # находим номер текущего пользователя
+    usid = req.user.id
+    # находим его в таблице user
+    user123 = User.objects.get(id=usid)
+    # номер его подписки(группы)
+    statusnow = user123.groups.all()[0].id
+    # находим его подписку в таблице group
+    groupold = Group.objects.get(id=statusnow)
+    k1 = groupold.name
+    print(k1)
+    # формируем список, отличных от текущей
+    spisok = []
+    for i in range(0, 3):
+        if Group.objects.all().values()[i]['name'] != k1:
+            spisok.append(Group.objects.all()[i])
+
+    k2 = spisok[0]
+    k3 = spisok[1]
+    print(Group.objects.all().values())
+    print(spisok)
+    # берем id подписок, отличных от текущей для изменения в базе
+    k4 = Group.objects.get(name=k2).id
+    k5 = Group.objects.get(name=k3).id
+    print(k4, type(k4))
+    print(k5, type(k5))
+    data = {'tek_status': k1, 'p1': k2, 'p2': k3, 'p3': k4, 'p4': k5}
+    return render(req, 'new_status.html', data)
+
+def del_status(req):
+    return render(req, 'index.html')
+
+
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 
@@ -132,8 +169,8 @@ def registr(req):
             k3 = anketa.cleaned_data.get('first_name')
             k4 = anketa.cleaned_data.get('last_name')
             k5 = anketa.cleaned_data.get('email')
-            user = authenticate(username=k1, password=k2) #сохраняет нового пользователя
-            man = User.objects.get(username=k1) #найдем нового пользователя
+            user = authenticate(username=k1, password=k2)  # сохраняет нового пользователя
+            man = User.objects.get(username=k1)  # найдем нового пользователя
             # заполним поля в таблице
             man.email = k5
             man.first_name = k3
@@ -141,7 +178,7 @@ def registr(req):
             man.save()
             # входим на сайт
             # login(req, user)
-            group = Group.objects.get(id=1) #находим бесплатную подписку
+            group = Group.objects.get(id=1)  # находим бесплатную подписку
             # добавляем в подписку №1 созданного человека
             group.user_set.add(man)
             return redirect('home')
