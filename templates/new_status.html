@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+{% block content %}
+    <h4>Статус текущей подписки: {{ tek_status }}</h4>
+    {% if p3 %}
+        <h4><a href="{% url 'new_status_buy' type=p3 %} ">Приобрести {{ p1 }}</a></h4>
+    {% endif %}
+    {% if p4 %}
+        <h4><a href="{% url 'new_status_buy' type=p4 %} ">Приобрести {{ p2 }}</a></h4>
+    {% endif %}
+
+{% endblock %}
