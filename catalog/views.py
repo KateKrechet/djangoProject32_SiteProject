@@ -148,10 +148,6 @@ def new_status(req):
     data = {'tek_status': k1, 'p1': k2, 'p2': k3, 'p3': k4, 'p4': k5}
     return render(req, 'new_status.html', data)
 
-def del_status(req):
-    return render(req, 'index.html')
-
-
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 
